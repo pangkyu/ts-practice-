@@ -5,19 +5,23 @@ import Edit from "./pages/Edit";
 import Add from "./pages/Add";
 import Detail from "./pages/Detail";
 import NotFound from "./pages/NotFound";
+import Error from "./pages/Error";
+import { ErrorBoundary } from "react-error-boundary";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/add" Component={Add} />
-        <Route path="/book/:id" Component={Detail} />
-        <Route path="/edit/:id" Component={Edit} />
-        <Route path="/signin" Component={Signin} />
-        <Route path="/" Component={Home} />
-        <Route Component={NotFound} />
-      </Routes>
-    </BrowserRouter>
+    <ErrorBoundary FallbackComponent={Error}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" Component={Home} />
+          <Route path="/add" Component={Add} />
+          <Route path="/book/:id" Component={Detail} />
+          <Route path="/edit/:id" Component={Edit} />
+          <Route path="/signin" Component={Signin} />
+          <Route path="*" Component={NotFound} />
+        </Routes>
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }
 
