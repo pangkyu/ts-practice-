@@ -1,5 +1,6 @@
 import React from "react";
+import SinginContainer from "../containers/SigninContainers";
 
 export default function Signin() {
-  return <div>사인인</div>;
+  return <SinginContainer />;
 }
