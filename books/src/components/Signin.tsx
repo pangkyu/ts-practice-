@@ -1,10 +1,13 @@
 import { Row, Col, Input, Button } from "antd";
 import styles from "./Signin.module.css";
 import { useRef } from "react";
+import { LoginReqType } from "../types";
 
-interface SigninProps {}
+interface SigninProps {
+  login: (reqData: LoginReqType) => void;
+}
 
-const Signin: React.FC<SigninProps> = () => {
+const Signin: React.FC<SigninProps> = ({ login }) => {
   const emailRef = useRef<any>(null);
   const passwordRef = useRef<any>(null);
 
@@ -66,6 +69,8 @@ const Signin: React.FC<SigninProps> = () => {
   function handleClick() {
     const email = emailRef.current!.state.value;
     const password = passwordRef.current!.state.value;
+
+    login({ email, password });
   }
 };
 
