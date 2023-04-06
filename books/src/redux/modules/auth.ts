@@ -2,6 +2,7 @@ import { Action, createActions, handleActions } from "redux-actions";
 import { call, put, takeEvery } from "redux-saga/effects";
 import { LoginReqType } from "../../types";
 import UserService from "../../services/UserService";
+import TokenService from "../../services/TokenService";
 
 interface AuthState {
   token: string | null;
@@ -54,6 +55,7 @@ function* loginSaga(action: Action<LoginReqType>) {
   try {
     yield put(pending());
     const token: string = yield call(UserService.login, action.payload);
+    TokenService.set(token);
     yield put(success(token));
   } catch (error) {
     yield put(fail(new Error("UNKNOWN_ERROR")));
