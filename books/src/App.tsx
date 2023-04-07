@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Signin from "./pages/Signin";
 import Edit from "./pages/Edit";
@@ -7,11 +7,13 @@ import Detail from "./pages/Detail";
 import NotFound from "./pages/NotFound";
 import Error from "./pages/Error";
 import { ErrorBoundary } from "react-error-boundary";
+import { ConnectedRouter } from "connected-react-router";
+import history from "./history";
 
 function App() {
   return (
     <ErrorBoundary FallbackComponent={Error}>
-      <BrowserRouter>
+      <ConnectedRouter history={history}>
         <Routes>
           <Route path="/" Component={Home} />
           <Route path="/add" Component={Add} />
@@ -20,7 +22,7 @@ function App() {
           <Route path="/signin" Component={Signin} />
           <Route path="*" Component={NotFound} />
         </Routes>
-      </BrowserRouter>
+      </ConnectedRouter>
     </ErrorBoundary>
   );
 }
